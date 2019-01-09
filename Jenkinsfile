@@ -1,10 +1,19 @@
-pipeline {
-  agent any
-  stages {
-    stage('install locally') {
-      steps {
-        sh 'mvn clean install'
-      }
-    }
-  }
+
+pipeline { 
+  agent { 
+    node { 
+      label 'master' 
+    } 
+     
+  } 
+  stages { 
+    stage('Build') { 
+      steps { 
+        withMaven(maven: 'M3') { 
+          sh 'mvn clean install' 
+        } 
+         
+      } 
+    }  
+  } 
 }
